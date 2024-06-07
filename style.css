@@ -1,14 +1,14 @@
 body {
     font-family: 'Arial', sans-serif; 
-    background-color: #f9f9f9; /* Define a cor de fundo */
+    background-color: #cecdd1; /* Define a cor de fundo */
     margin: 20px;  /* Define a margem ao redor do corpo da página */
 }
 
-h1 {
-    background-color: blue; 
+h1 { 
     color: #218; /* Define a cor do texto do h1 */
     display: flex; 
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    font-size: 50px;
 }
 
 h2 {
@@ -16,15 +16,16 @@ h2 {
     margin-bottom: 10px; /* Define a margem inferior do h2 */
     display: flex; 
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    font-size: 40px;
 }
 
 .cards {
-    background-color: gray; /* Define a cor de fundo do contêiner de cards */
+    
     display: flex; 
     justify-content: center; /* Centraliza os cards horizontalmente */
     padding: 15px; /* Define o preenchimento interno do contêiner de cards */
-    margin: 3%; /* Define a margem externa do contêiner de cards */
-    gap: 30px;   /* Define o espaço entre os cards */
+    gap: 50px;   /* Define o espaço entre os cards */
+    height: 450px;
 }
 
 .f1, .f2 {
@@ -33,14 +34,32 @@ h2 {
     padding: 20px; /* Define o preenchimento interno dos cards individuais */
     margin: 10px 0; /* Define a margem superior e inferior dos cards individuais */
     border-radius: 5px; /* Define as bordas arredondadas dos cards */
-    width: 300px; /* Define a largura dos cards */
+    width: 30%; /* Define a largura dos cards */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Define a sombra dos cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: bold;
 }
 
-input, button {
-    background-color: blue; 
+label{
+    font-size: 20px;
+}
+
+input{
     width: 100%; /* Define a largura dos inputs e botões */
-    padding: 1%; /* Define o preenchimento interno dos inputs e botões */
+    margin-top: 5px; /* Define a margem superior dos inputs e botões */
+    margin-bottom: 10px; /* Define a margem inferior dos inputs e botões */
+    border: 1px solid #ddd; /* Define a borda dos inputs e botões */
+    border-radius: 3px; /* Define as bordas arredondadas dos inputs e botões */
+    font-size: 35px; /* Define o tamanho da fonte dos inputs e botões */
+    text-align: center; /* Centraliza o texto dos inputs e botões */
+    height: 50px;
+    font-weight: bold;
+}
+
+button { 
+    width: 100%; /* Define a largura dos inputs e botões */
     margin-top: 5px; /* Define a margem superior dos inputs e botões */
     margin-bottom: 10px; /* Define a margem inferior dos inputs e botões */
     border: 1px solid #ddd; /* Define a borda dos inputs e botões */
@@ -50,7 +69,6 @@ input, button {
 }
 
 .operacoes {
-    padding: 1%; /* Define o preenchimento interno do contêiner de operações */
     margin-top: 5px; /* Define a margem superior do contêiner de operações */
     margin-bottom: 10px; /* Define a margem inferior do contêiner de operações */
     border-radius: 3px; /* Define as bordas arredondadas do contêiner de operações */
@@ -111,18 +129,31 @@ button:hover {
     border-radius: 5px; /* Define as bordas arredondadas dos resultados */
 }
 
-#resultado div {
-    display: inline-block; /* Exibe o conteúdo como um bloco inline */
-    text-align: center; /* Centraliza o texto dentro do bloco */
+.f3{
+    display: flex;
+    justify-content: center;
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    padding: 15px; /* Define o preenchimento interno do contêiner de cards */
+    gap: 50px;   /* Define o espaço entre os cards */
+    height: 450px;
 }
 
-#resultado div div:first-child {
-    margin-bottom: -2px; /* Define a margem inferior do primeiro filho */
+.resultados { 
+    border-radius: 5px; /* Define as bordas arredondadas dos cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Define a sombra dos cards */
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    justify-content: center;
+}
+#resultado{
+    display: flex;
+    font-size: 30px;
 }
 
-#resultado div div:last-child {
-    border-top: 1px solid black; /* Define a borda superior do último filho */
-    padding-top: 2px; /* Define o preenchimento superior do último filho */
+.resultado_h2{
+    margin-top: -100px;
+    font-size: 50px;
 }
 
 @media (max-width: 600px) {
