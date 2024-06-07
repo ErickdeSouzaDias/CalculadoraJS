@@ -1,60 +1,60 @@
-function Fraction(numerator, denominator) {
-    this.numerator = numerator;
+function fracao(numerador, denominator) {
+    this.numerador = numerador;
     this.denominator = denominator;
 
-    this.simplify = function() {
+    this.simplificar = function() {
         const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-        const divisor = gcd(this.numerator, this.denominator);
-        this.numerator /= divisor;
+        const divisor = gcd(this.numerador, this.denominator);
+        this.numerador /= divisor;
         this.denominator /= divisor;
         return this;
     };
 
-    this.toDecimal = function() {
-        return this.numerator / this.denominator;
+    this.decimal = function() {
+        return this.numerador / this.denominator;
     };
 
-    this.pow = function(exponent) {
-        return new Fraction(
-            Math.pow(this.numerator, exponent),
-            Math.pow(this.denominator, exponent)
-        ).simplify();
+    this.pow = function(expoente) {
+        return new fracao(
+            Math.pow(this.numerador, expoente),
+            Math.pow(this.denominator, expoente)
+        ).simplificar();
     };
 
-    this.add = function(other) {
-        return new Fraction(
-            this.numerator * other.denominator + other.numerator * this.denominator,
-            this.denominator * other.denominator
-        ).simplify();
+    this.adicao = function(outro) {
+        return new fracao(
+            this.numerador * outro.denominator + outro.numerador * this.denominator,
+            this.denominator * outro.denominator
+        ).simplificar();
     };
 
-    this.subtract = function(other) {
-        return new Fraction(
-            this.numerator * other.denominator - other.numerator * this.denominator,
-            this.denominator * other.denominator
-        ).simplify();
+    this.subtrair = function(outro) {
+        return new fracao(
+            this.numerador * outro.denominator - outro.numerador * this.denominator,
+            this.denominator * outro.denominator
+        ).simplificar();
     };
 
-    this.multiply = function(other) {
-        return new Fraction(
-            this.numerator * other.numerator,
-            this.denominator * other.denominator
-        ).simplify();
+    this.multiplicar = function(outro) {
+        return new fracao(
+            this.numerador * outro.numerador,
+            this.denominator * outro.denominator
+        ).simplificar();
     };
 
-    this.divide = function(other) {
-        return new Fraction(
-            this.numerator * other.denominator,
-            this.denominator * other.numerator
-        ).simplify();
+    this.dividir = function(outro) {
+        return new fracao(
+            this.numerador * outro.denominator,
+            this.denominator * outro.numerador
+        ).simplificar();
     };
 }
 
-function createFractionWithExponent(num, denom, exponent) {
-    return new Fraction(num, denom).pow(exponent);
+function criar_fracao(num, denom, expoente) {
+    return new fracao(num, denom).pow(expoente);
 }
 
-function calculate() {
+function calcular() {
     const num1 = parseInt(document.getElementById('num1').value);
     const denom1 = parseInt(document.getElementById('denom1').value);
     const exp1 = parseInt(document.getElementById('exp1').value);
@@ -63,29 +63,29 @@ function calculate() {
     const denom2 = parseInt(document.getElementById('denom2').value);
     const exp2 = parseInt(document.getElementById('exp2').value);
 
-    const fraction1 = createFractionWithExponent(num1, denom1, exp1);
-    const fraction2 = createFractionWithExponent(num2, denom2, exp2);
+    const f1 = criar_fracao(num1, denom1, exp1);
+    const f2 = criar_fracao(num2, denom2, exp2);
 
-    const operation = document.getElementById('operation').value;
+    const op = document.getElementById('op').value;
     let result;
 
-    switch (operation) {
-        case 'add':
-            result = fraction1.add(fraction2);
+    switch (op) {
+        case 'adicao':
+            result = f1.adicao(f2);
             break;
-        case 'subtract':
-            result = fraction1.subtract(fraction2);
+        case 'sub':
+            result = f1.subtrair(f2);
             break;
-        case 'multiply':
-            result = fraction1.multiply(fraction2);
+        case 'mult':
+            result = f1.multiplicar(f2);
             break;
-        case 'divide':
-            result = fraction1.divide(fraction2);
+        case 'dividir':
+            result = f1.dividir(f2);
             break;
         default:
             result = null;
     }
 
-    document.getElementById('result').innerText = `Resultado: ${result.numerator}/${result.denominator}`;
-    document.getElementById('resultDecimal').innerText = `Resultado em decimal: ${result.toDecimal()}`;
+    document.getElementById('resultado').innerText = `Resultado em fração: ${result.numerador}/${result.denominator}`;
+    document.getElementById('resultado_decimal').innerText = `Resultado em decimal: ${result.decimal().toFixed(3)}`;
 }
