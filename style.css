@@ -1,106 +1,132 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    margin: 20px;  
+    font-family: 'Arial', sans-serif; 
+    background-color: #f9f9f9; /* Define a cor de fundo */
+    margin: 20px;  /* Define a margem ao redor do corpo da página */
 }
 
 h1 {
-    background-color: blue;
-    color: #218;
-    display:flex;
-    justify-content: center;
+    background-color: blue; 
+    color: #218; /* Define a cor do texto do h1 */
+    display: flex; 
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
 }
 
 h2 {
-    color: #851;
-    margin-bottom: 10px;
-    display:flex;
-    justify-content: center;
+    color: #851; /* Define a cor do texto do h2 */
+    margin-bottom: 10px; /* Define a margem inferior do h2 */
+    display: flex; 
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
 }
 
-.cards{
-    background-color: gray;
-    display: flex;
-    justify-content: center;
-    padding: 15px;
-    margin: 3%;
-    gap: 30px;   
+.cards {
+    background-color: gray; /* Define a cor de fundo do contêiner de cards */
+    display: flex; 
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    padding: 15px; /* Define o preenchimento interno do contêiner de cards */
+    margin: 3%; /* Define a margem externa do contêiner de cards */
+    gap: 30px;   /* Define o espaço entre os cards */
 }
 
 .f1, .f2 {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff; 
+    border: 1px solid #ddd; /* Define a borda dos cards individuais */
+    padding: 20px; /* Define o preenchimento interno dos cards individuais */
+    margin: 10px 0; /* Define a margem superior e inferior dos cards individuais */
+    border-radius: 5px; /* Define as bordas arredondadas dos cards */
+    width: 300px; /* Define a largura dos cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Define a sombra dos cards */
 }
 
 input, button {
-    background-color: #fff;
-    width: 100%;
-    padding: 1%;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 16px;
-    text-align:center;
+    background-color: blue; 
+    width: 100%; /* Define a largura dos inputs e botões */
+    padding: 1%; /* Define o preenchimento interno dos inputs e botões */
+    margin-top: 5px; /* Define a margem superior dos inputs e botões */
+    margin-bottom: 10px; /* Define a margem inferior dos inputs e botões */
+    border: 1px solid #ddd; /* Define a borda dos inputs e botões */
+    border-radius: 3px; /* Define as bordas arredondadas dos inputs e botões */
+    font-size: 16px; /* Define o tamanho da fonte dos inputs e botões */
+    text-align: center; /* Centraliza o texto dos inputs e botões */
 }
 
-.operacoes, button{
-    background-color: ;
-    padding: 1%;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    font-size: 16px;
-    text-align: center;
+.operacoes {
+    padding: 1%; /* Define o preenchimento interno do contêiner de operações */
+    margin-top: 5px; /* Define a margem superior do contêiner de operações */
+    margin-bottom: 10px; /* Define a margem inferior do contêiner de operações */
+    border-radius: 3px; /* Define as bordas arredondadas do contêiner de operações */
+    font-size: 16px; /* Define o tamanho da fonte do contêiner de operações */
+    text-align: center; /* Centraliza o texto do contêiner de operações */
 }
 
 select {
-    border-radius: 10px;
-    font-size: 16px;
-
+    width: 100%; /* Define a largura do select */
+    padding: 10px; /* Define o preenchimento interno do select */
+    margin-top: 10px; /* Define a margem superior do select */
+    border: 1px solid #ddd; /* Define a borda do select */
+    border-radius: 10px; /* Define as bordas arredondadas do select */
+    font-size: 16px; /* Define o tamanho da fonte do select */
+    appearance: none; /* Remove a seta padrão do select */
+    background-color: white; /* Define a cor de fundo do select */
+    color: #333; /* Define a cor do texto do select */
+    text-align: center; /* Centraliza o texto do select */
+    width: auto; /* Ajusta a largura automaticamente */
 }
+
+select:focus {
+    outline: none; /* Remove o contorno padrão ao focar no select */
+    border-color: #4CAF50; /* Define a cor da borda ao focar no select */
+}
+
+select option {
+    padding: 10px; /* Define o preenchimento interno das opções */
+    background-color: #fff; /* Define a cor de fundo das opções */
+    color: #333; /* Define a cor do texto das opções */
+}
+
 button {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 30%;
+    background-color: #4CAF50; /* Define a cor de fundo do botão */
+    padding: 10px 20px; /* Define o preenchimento interno do botão */
+    margin-top: 10px; /* Define a margem superior do botão */
+    margin-bottom: 10px; /* Define a margem inferior do botão */
+    border-radius: 8px; /* Define as bordas arredondadas do botão */
+    font-size: 16px; /* Define o tamanho da fonte do botão */
+    text-align: center; /* Centraliza o texto do botão */
+    width: auto; /* Ajusta a largura automaticamente */
+    display: block; /* Define o botão como um bloco para centralizá-lo */
+    margin-left: auto; /* Centraliza horizontalmente o botão */
+    margin-right: auto; /* Centraliza horizontalmente o botão */
 }
 
 button:hover {
-    background-color: #45a042;
+    background-color: #45a042; /* Define a cor de fundo do botão ao passar o mouse */
 }
 
 #resultado, #resultado_decimal {
-    background-color: green;
-    font-size: 18px;
-    color: #333;
-    margin-top: 10px;
-    display:flex;
-    justify-content: center;
+    font-size: 18px; /* Define o tamanho da fonte dos resultados */
+    color: black; /* Define a cor do texto dos resultados */
+    margin-top: 10px; /* Define a margem superior dos resultados */
+    padding: 10px; /* Define o preenchimento interno dos resultados */
+    display: flex; 
+    justify-content: center; /* Centraliza os resultados horizontalmente */
+    border-radius: 5px; /* Define as bordas arredondadas dos resultados */
 }
+
 #resultado div {
-    display: inline-block;
-    text-align: center;
+    display: inline-block; /* Exibe o conteúdo como um bloco inline */
+    text-align: center; /* Centraliza o texto dentro do bloco */
 }
 
 #resultado div div:first-child {
-    margin-bottom: -2px;
+    margin-bottom: -2px; /* Define a margem inferior do primeiro filho */
 }
 
 #resultado div div:last-child {
-    border-top: 1px solid black;
-    padding-top: 2px;
+    border-top: 1px solid black; /* Define a borda superior do último filho */
+    padding-top: 2px; /* Define o preenchimento superior do último filho */
 }
-
 
 @media (max-width: 600px) {
     div {
-        width: 90%;
+        width: 90%; /* Define a largura dos divs como 90% da largura da tela */
     }
 }
