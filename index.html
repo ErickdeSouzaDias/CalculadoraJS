@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Frações</title>
+    <title>Calculadora de Frações 1.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Calculadora de Frações avançada 1.0</h1>
-    <div class=cards>
-    <div class="f1">
-            <h2>Primeira Fração</h2>
-            <label for="Numerador">Numerador:<input type="number" id="num1"></label>
-            <label for="Denominador">Denominador:<input type="number" id="denom1"></label>
-            <label for="Expoente">Expoente:<input type="number" id="exp1"></label>
+    <h1>Calculadora de Frações 1.0</h1>
+    <div class="cards">
+        <div class="card f1">
+            <h2>Fração 1</h2>
+            <input type="number" id="num1" placeholder="Numerador">
+            <input type="number" id="denom1" placeholder="Denominador">
+            <input type="number" id="exp1" placeholder="Expoente(Opcional)">
         </div>
-
-        <div class="f2">
-        <h2>Segunda Fração</h2>
-            <label for="Numerador">Numerador:<input type="number" id="num2"></label>
-            <label for="Denominador">Denominador:<input type="number" id="denom2"></label>
-            <label for="Expoente">Expoente:<input type="number" id="exp2"></label>
+        <div class="card f2">
+            <h2>Fração 2</h2>
+            <input type="number" id="num2" placeholder="Numerador">
+            <input type="number" id="denom2" placeholder="Denominador">
+            <input type="number" id="exp2" placeholder="Expoente(Opcional)">
+        </div>
+        <div class="card resultado-card">
+            <h2>Resultado</h2>
+            <div id="resultado"></div>
         </div>
     </div>
-
-    <div class=operacoes>
-        <h3>Escolha a operação desejada abaixo</h3>
+    <div class="operacoes">
         <select id="op">
             <option value="adicao">Adição</option>
-            <option value="sub">Subtração</option> 
+            <option value="sub">Subtração</option>
             <option value="mult">Multiplicação</option>
             <option value="divi">Divisão</option>
         </select>
-    </div>
-
-    <button onclick="calcular()"><i class="fa fa-calculator"></i> Calcular</button>
-    <div class="f3">
-        <div class="resultados">
-            <h2 class="resultado_h2">Resultado</h2>
-            <p id="resultado"></p>
-            <p id="resultado_decimal"></p>
-        </div>
+        <button onclick="calcular()">Calcular</button>
+        <button onclick="limparCampos()">Limpar</button>
     </div>
     <script src="script.js"></script>
 </body>
