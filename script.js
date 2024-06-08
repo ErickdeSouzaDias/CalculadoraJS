@@ -152,7 +152,3 @@ function limparCampos() {
     document.getElementById('exp2').value = '';
     document.getElementById('resultado').innerHTML = '';
 }
-
-
-    
-
