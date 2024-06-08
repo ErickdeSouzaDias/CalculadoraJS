@@ -1,132 +1,158 @@
-
-// Função construtora principal
-function fracao(numerador, denominador) {
+function Fraction(numerador, denominador) {
     this.numerador = numerador;
     this.denominador = denominador;
 
-    // Método para simplificar a fração
     this.simplificar = function() {
-        const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b)); // Função recursiva para calcular o máximo divisor comum (MDC)
-        const divisor = gcd(this.numerador, this.denominador); // Calcula o MDC do numerador e do denominador
-        this.numerador /= divisor; // Divide o numerador pelo MDC para simplificar
-        this.denominador /= divisor; // Divide o denominador pelo MDC para simplificar
-        return this; // Retorna a fração simplificada
+        const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+        const divisor = gcd(this.numerador, this.denominador);
+        this.numerador /= divisor;
+        this.denominador /= divisor;
+        return this;
     };
 
-    // Método para converter uma fração imprópria em número misto
-    this.toMixedNumber = function() {
-        const inteiro = Math.floor(this.numerador / this.denominador); // Parte inteira do número misto
-        const resto = this.numerador % this.denominador; // Resto da divisão
-        return {inteiro: inteiro, numerador: resto, denominador: this.denominador}; // Retorna o número misto como um objeto
-    };
-
-    // Método para converter um número misto em uma fração imprópria
-    this.toImproperFraction = function() {
-        const numerador = this.inteiro * this.denominador + this.numerador; // Calcula o numerador da fração imprópria
-        return new fracao(numerador, this.denominador); // Retorna a fração imprópria
-    };
-
-
-    // Método para converter a fração para decimal
-    this.decimal = function() {
+    this.toDecimal = function() {
         return this.numerador / this.denominador;
     };
 
-    // Método para elevar a fração a um expoente
     this.pow = function(expoente) {
         if (expoente >= 0) {
-            // Se o expoente for positivo
-            return new fracao(
-                Math.pow(this.numerador, expoente), // Eleva o numerador ao expoente
-                Math.pow(this.denominador, expoente) // Eleva o denominador ao expoente
-            ).simplificar(); // Simplifica a fração resultante
+            return new Fraction(
+                Math.pow(this.numerador, expoente),
+                Math.pow(this.denominador, expoente)
+            ).simplificar();
+
+            // Inverte para funcionar caso seja expoente negativo
         } else {
-            // Se o expoente for negativo, inverte a fração e eleva ao expoente positivo
-            return new fracao(
-                Math.pow(this.denominador, -expoente), // Eleva o denominador ao expoente positivo
-                Math.pow(this.numerador, -expoente) // Eleva o numerador ao expoente positivo
-            ).simplificar(); // Simplifica a fração resultante
+            return new Fraction(
+                Math.pow(this.denominador, -expoente),
+                Math.pow(this.numerador, -expoente)
+            ).simplificar();
         }
     };
 
-    // Método para adicionar a segunda_fracao fração
-    this.adicao = function(segunda_fracao) {
-        return new fracao(
-            this.numerador * segunda_fracao.denominador + segunda_fracao.numerador * this.denominador, // Calcula o numerador da soma
-            this.denominador * segunda_fracao.denominador // Calcula o denominador da soma
-        ).simplificar(); // Simplifica a fração resultante
+    this.adicao = function(outra_fracao) {
+        return new Fraction(
+            this.numerador * outra_fracao.denominador + outra_fracao.numerador * this.denominador,
+            this.denominador * outra_fracao.denominador
+        ).simplificar();
     };
 
-    // Método para subtrair segunda_fracao fração
-    this.subtrair = function(segunda_fracao) {
-        return new fracao(
-            this.numerador * segunda_fracao.denominador - segunda_fracao.numerador * this.denominador, // Calcula o numerador da subtração
-            this.denominador * segunda_fracao.denominador // Calcula o denominador da subtração
-        ).simplificar(); // Simplifica a fração resultante
+    this.sub = function(outra_fracao) {
+        return new Fraction(
+            this.numerador * outra_fracao.denominador - outra_fracao.numerador * this.denominador,
+            this.denominador * outra_fracao.denominador
+        ).simplificar();
     };
 
-    // Método para multiplicar pela segunda fração
-    this.multiplicar = function(segunda_fracao) {
-        return new fracao(
-            this.numerador * segunda_fracao.numerador, // Calcula o numerador do produto
-            this.denominador * segunda_fracao.denominador // Calcula o denominador do produto
-        ).simplificar(); // Simplifica a fração resultante
+    this.mult = function(outra_fracao) {
+        return new Fraction(
+            this.numerador * outra_fracao.numerador,
+            this.denominador * outra_fracao.denominador
+        ).simplificar();
     };
 
-    // Método para dividir pela segunda fração
-    this.dividir = function(segunda_fracao) {
-        return new fracao(
-            this.numerador * segunda_fracao.denominador, // Multiplica o numerador pelo denominador da segunda_fracao 
-            this.denominador * segunda_fracao.numerador // Multiplica o denominador pelo numerador da segunda_fracao 
-        ).simplificar(); // Simplifica a fração resultante
+    this.divi = function(outra_fracao) {
+        return new Fraction(
+            this.numerador * outra_fracao.denominador,
+            this.denominador * outra_fracao.numerador
+        ).simplificar();
     };
+
+    this.toMixedNumber = function() {
+        const inteiro = Math.floor(this.numerador / this.denominador); 
+        const resto = this.numerador % this.denominador; 
+        return {inteiro: inteiro, numerador: resto, denominador: this.denominador}; 
+    };
+    
+    
 }
 
-// Função extra para criar uma fração e elevar a um expoente
+// Validar se é numero 
+document.getElementById('num1').addEventListener('input', validadar_entrada);
+document.getElementById('denom1').addEventListener('input', validadar_entrada);
+document.getElementById('exp1').addEventListener('input', validadar_entrada);
+document.getElementById('num2').addEventListener('input', validadar_entrada);
+document.getElementById('denom2').addEventListener('input', validadar_entrada);
+document.getElementById('exp2').addEventListener('input', validadar_entrada);
+
+function validadar_entrada(event) {
+    const valor = event.target.value; 
+    const numero = parseFloat(valor); 
+
+
+    if (isNaN(numero)) {
+    
+        event.target.value = '';
+    }
+}
+
 function criar_fracao(num, denom, expoente) {
-    return new fracao(num, denom).pow(expoente);
+    return new Fraction(num, denom).pow(expoente);
 }
 
-// Função principal para calcular o resultado com base na operação selecionada
 function calcular() {
-    // Valores de entrada do usuário
     const num1 = parseInt(document.getElementById('num1').value);
     const denom1 = parseInt(document.getElementById('denom1').value);
-    const exp1 = parseInt(document.getElementById('exp1').value);
+    const exp1 = document.getElementById('exp1').value.trim() === '' ? 1 : parseInt(document.getElementById('exp1').value);
 
     const num2 = parseInt(document.getElementById('num2').value);
     const denom2 = parseInt(document.getElementById('denom2').value);
-    const exp2 = parseInt(document.getElementById('exp2').value);
+    const exp2 = document.getElementById('exp2').value.trim() === '' ? 1 : parseInt(document.getElementById('exp2').value);
 
-    // Cria frações a partir dos valores de entrada
     const f1 = criar_fracao(num1, denom1, exp1);
     const f2 = criar_fracao(num2, denom2, exp2);
 
-    // Operação selecionada pelo usuário
     const op = document.getElementById('op').value;
     let result;
 
-    // Realiza a operação selecionada
     switch (op) {
         case 'adicao':
             result = f1.adicao(f2);
             break;
         case 'sub':
-            result = f1.subtrair(f2);
+            result = f1.sub(f2);
             break;
         case 'mult':
-            result = f1.multiplicar(f2);
+            result = f1.mult(f2);
             break;
-        case 'dividir':
-            result = f1.dividir(f2);
+        case 'divi':
+            result = f1.divi(f2);
             break;
         default:
             result = null;
     }
 
-    // Mostra o resultado em fração, decimal e número misto
-    document.getElementById('resultado').innerHTML = `Resultado em fração: ${result.numerador}/${result.denominador} <br> 
-    Resultado em decimal: ${result.decimal().toFixed(3)} <br> 
-    Resultado em número misto: ${result.toMixedNumber().inteiro} ${result.toMixedNumber().numerador}/${result.toMixedNumber().denominador}`;
+    if (result) {
+        const mixedNumber = result.toMixedNumber();
+        const mixedNumberStr = mixedNumber.inteiro !== 0 
+            ? `${mixedNumber.inteiro} <span class="fracao">${formata_numero(mixedNumber.numerador, 'numerador')}<span class="denominador">${formata_numero(mixedNumber.denominador, 'denominador')}</span></span>`
+            : `<span class="fracao">${formata_numero(mixedNumber.numerador, 'numerador')}<span class="denominador">${formata_numero(mixedNumber.denominador, 'denominador')}</span></span>`;
 
+        document.getElementById('resultado').innerHTML = `
+            Fração: <span class="fracao">${formata_numero(result.numerador, 'numerador')}<span class="denominador">${formata_numero(result.denominador, 'denominador')}</span></span> <br> 
+            Decimal: ${result.toDecimal().toFixed(3)} <br> 
+            Misto: ${mixedNumberStr}`;
+    } else {
+        document.getElementById('resultado').innerHTML = `Operação inválida.`;
+    }
 }
+
+// Função para formatar e adicionar a classe "large" se for grande (não ta funcionando ainda)
+function formata_numero(numero, tipo) {
+    const tamanho = numero.toString().length;
+    return tamanho > 4 ? `<span class="${tipo} large">${numero}</span>` : `<span class="${tipo}">${numero}</span>`;
+}
+
+function limparCampos() {
+    document.getElementById('num1').value = '';
+    document.getElementById('denom1').value = '';
+    document.getElementById('exp1').value = '';
+    document.getElementById('num2').value = '';
+    document.getElementById('denom2').value = '';
+    document.getElementById('exp2').value = '';
+    document.getElementById('resultado').innerHTML = '';
+}
+
+
+    
+
