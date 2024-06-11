@@ -1,93 +1,127 @@
-function Fraction(numerador, denominador) {
-    this.numerador = numerador;
-    this.denominador = denominador;
+class Fracao {
+    constructor(numerador, denominador) {
+        this.numerador = numerador;
+        this.denominador = denominador;
+    }
 
-    this.simplificar = function() {
+    simplificar() {
         const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
         const divisor = gcd(this.numerador, this.denominador);
-        this.numerador /= divisor;
-        this.denominador /= divisor;
-        return this;
-    };
+        let numeradorSimplificado = this.numerador / divisor;
+        let denominadorSimplificado = this.denominador / divisor;
 
-    this.toDecimal = function() {
+        if (denominadorSimplificado < 0) {
+            numeradorSimplificado *= -1;
+            denominadorSimplificado *= -1;
+        }
+
+        const simplificacao = divisor !== 1 ? 
+            `Simplificação: ${this.numerador} ÷ ${divisor} / ${this.denominador} ÷ ${divisor} = ${numeradorSimplificado}/${denominadorSimplificado}` : 
+            `A fração já está simplificada.`;
+
+        this.numerador = numeradorSimplificado;
+        this.denominador = denominadorSimplificado;
+        return { simplificada: this, passos: simplificacao };
+    }
+
+    toDecimal() {
         return this.numerador / this.denominador;
-    };
+    }
 
-    this.pow = function(expoente) {
+    pow(expoente) {
         if (expoente >= 0) {
-            return new Fraction(
+            return new Fracao(
                 Math.pow(this.numerador, expoente),
                 Math.pow(this.denominador, expoente)
             ).simplificar();
-
-            // Inverte para funcionar caso seja expoente negativo
         } else {
-            return new Fraction(
+            return new Fracao(
                 Math.pow(this.denominador, -expoente),
                 Math.pow(this.numerador, -expoente)
             ).simplificar();
         }
-    };
+    }
 
-    this.adicao = function(outra_fracao) {
-        return new Fraction(
-            this.numerador * outra_fracao.denominador + outra_fracao.numerador * this.denominador,
-            this.denominador * outra_fracao.denominador
-        ).simplificar();
-    };
+    mmc(a, b) {
+        const gcd = (x, y) => (y === 0 ? x : gcd(y, x % y));
+        return Math.abs(a * b) / gcd(a, b);
+    }
 
-    this.sub = function(outra_fracao) {
-        return new Fraction(
-            this.numerador * outra_fracao.denominador - outra_fracao.numerador * this.denominador,
-            this.denominador * outra_fracao.denominador
-        ).simplificar();
-    };
+    adicao(outra_fracao) {
+        const mmc = this.mmc(this.denominador, outra_fracao.denominador);
+        const novoNumerador = (this.numerador * (mmc / this.denominador)) + (outra_fracao.numerador * (mmc / outra_fracao.denominador));
+        const { simplificada, passos } = new Fracao(novoNumerador, mmc).simplificar();
+        return {
+            result: simplificada,
+            steps: `MMC(${this.denominador}, ${outra_fracao.denominador}) = ${mmc}\n` +
+                   `${this.numerador} * (${mmc} / ${this.denominador}) + ${outra_fracao.numerador} * (${mmc} / ${outra_fracao.denominador}) = ${novoNumerador}\n` +
+                   passos
+        };
+    }
 
-    this.mult = function(outra_fracao) {
-        return new Fraction(
-            this.numerador * outra_fracao.numerador,
-            this.denominador * outra_fracao.denominador
-        ).simplificar();
-    };
+    sub(outra_fracao) {
+        const mmc = this.mmc(this.denominador, outra_fracao.denominador);
+        const novoNumerador = (this.numerador * (mmc / this.denominador)) - (outra_fracao.numerador * (mmc / outra_fracao.denominador));
+        const { simplificada, passos } = new Fracao(novoNumerador, mmc).simplificar();
+        return {
+            result: simplificada,
+            steps: `MMC(${this.denominador}, ${outra_fracao.denominador}) = ${mmc}\n` +
+                   `${this.numerador} * (${mmc} / ${this.denominador}) - ${outra_fracao.numerador} * (${mmc} / ${outra_fracao.denominador}) = ${novoNumerador}\n` +
+                   passos
+        };
+    }
 
-    this.divi = function(outra_fracao) {
-        return new Fraction(
-            this.numerador * outra_fracao.denominador,
-            this.denominador * outra_fracao.numerador
-        ).simplificar();
-    };
+    mult(outra_fracao) {
+        const novoNumerador = this.numerador * outra_fracao.numerador;
+        const novoDenominador = this.denominador * outra_fracao.denominador;
+        const { simplificada, passos } = new Fracao(novoNumerador, novoDenominador).simplificar();
+        return {
+            result: simplificada,
+            steps: `${this.numerador} * ${outra_fracao.numerador} = ${novoNumerador}\n` +
+                   `${this.denominador} * ${outra_fracao.denominador} = ${novoDenominador}\n` +
+                   passos
+        };
+    }
 
-    this.toMixedNumber = function() {
-        const inteiro = Math.floor(this.numerador / this.denominador); 
-        const resto = this.numerador % this.denominador; 
-        return {inteiro: inteiro, numerador: resto, denominador: this.denominador}; 
-    };
-    
-    
-}
+    divi(outra_fracao) {
+        const novoNumerador = this.numerador * outra_fracao.denominador;
+        const novoDenominador = this.denominador * outra_fracao.numerador;
+        const { simplificada, passos } = new Fracao(novoNumerador, novoDenominador).simplificar();
+        return {
+            result: simplificada,
+            steps: `${this.numerador} * ${outra_fracao.denominador} = ${novoNumerador}\n` +
+                   `${this.denominador} * ${outra_fracao.numerador} = ${novoDenominador}\n` +
+                   passos
+        };
+    }
 
-// Validar se é numero 
-document.getElementById('num1').addEventListener('input', validadar_entrada);
-document.getElementById('denom1').addEventListener('input', validadar_entrada);
-document.getElementById('exp1').addEventListener('input', validadar_entrada);
-document.getElementById('num2').addEventListener('input', validadar_entrada);
-document.getElementById('denom2').addEventListener('input', validadar_entrada);
-document.getElementById('exp2').addEventListener('input', validadar_entrada);
-
-function validadar_entrada(event) {
-    const valor = event.target.value; 
-    const numero = parseFloat(valor); 
-
-
-    if (isNaN(numero)) {
-    
-        event.target.value = '';
+    toMixedNumber() {
+        const inteiro = Math.floor(this.numerador / this.denominador);
+        const resto = this.numerador % this.denominador;
+        return { inteiro: inteiro, numerador: resto, denominador: this.denominador };
     }
 }
 
+// EM TESTES
+
+// document.getElementById('num1').addEventListener('input', validar_entrada);
+// document.getElementById('denom1').addEventListener('input', validar_entrada);
+// document.getElementById('exp1').addEventListener('input', validar_entrada);
+// document.getElementById('num2').addEventListener('input', validar_entrada);
+// document.getElementById('denom2').addEventListener('input', validar_entrada);
+// document.getElementById('exp2').addEventListener('input', validar_entrada);
+
+// function validar_entrada(event) {
+//     console.log("Validando entrada...");
+//     const valor = event.target.value;
+//     const numero = parseFloat(valor);
+//     if (isNaN(numero) && valor !== '-') {
+//         event.target.value = '';
+//     }
+// }
+
 function criar_fracao(num, denom, expoente) {
-    return new Fraction(num, denom).pow(expoente);
+    return new Fracao(num, denom).pow(expoente).simplificada;
 }
 
 function calcular() {
@@ -103,20 +137,20 @@ function calcular() {
     const f2 = criar_fracao(num2, denom2, exp2);
 
     const op = document.getElementById('op').value;
-    let result;
+    let result, steps;
 
     switch (op) {
         case 'adicao':
-            result = f1.adicao(f2);
+            ({ result, steps } = f1.adicao(f2));
             break;
         case 'sub':
-            result = f1.sub(f2);
+            ({ result, steps } = f1.sub(f2));
             break;
         case 'mult':
-            result = f1.mult(f2);
+            ({ result, steps } = f1.mult(f2));
             break;
         case 'divi':
-            result = f1.divi(f2);
+            ({ result, steps } = f1.divi(f2));
             break;
         default:
             result = null;
@@ -124,7 +158,7 @@ function calcular() {
 
     if (result) {
         const mixedNumber = result.toMixedNumber();
-        const mixedNumberStr = mixedNumber.inteiro !== 0 
+        const mixedNumberStr = mixedNumber.inteiro !== 0
             ? `${mixedNumber.inteiro} <span class="fracao">${formata_numero(mixedNumber.numerador, 'numerador')}<span class="denominador">${formata_numero(mixedNumber.denominador, 'denominador')}</span></span>`
             : `<span class="fracao">${formata_numero(mixedNumber.numerador, 'numerador')}<span class="denominador">${formata_numero(mixedNumber.denominador, 'denominador')}</span></span>`;
 
@@ -132,12 +166,14 @@ function calcular() {
             Fração: <span class="fracao">${formata_numero(result.numerador, 'numerador')}<span class="denominador">${formata_numero(result.denominador, 'denominador')}</span></span> <br> 
             Decimal: ${result.toDecimal().toFixed(3)} <br> 
             Misto: ${mixedNumberStr}`;
+
+        document.getElementById('calculos').innerHTML = steps.replace(/\n/g, '<br>');
     } else {
         document.getElementById('resultado').innerHTML = `Operação inválida.`;
+        document.getElementById('calculos').innerHTML = ``;
     }
 }
 
-// Função para formatar e adicionar a classe "large" se for grande (não ta funcionando ainda)
 function formata_numero(numero, tipo) {
     const tamanho = numero.toString().length;
     return tamanho > 4 ? `<span class="${tipo} large">${numero}</span>` : `<span class="${tipo}">${numero}</span>`;
@@ -151,4 +187,5 @@ function limparCampos() {
     document.getElementById('denom2').value = '';
     document.getElementById('exp2').value = '';
     document.getElementById('resultado').innerHTML = '';
+    document.getElementById('calculos').innerHTML = '';
 }
