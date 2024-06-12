@@ -25,6 +25,7 @@ h2 {
     padding: 15px;
     gap: 50px;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .card {
